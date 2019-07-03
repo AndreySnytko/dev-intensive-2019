@@ -3,6 +3,8 @@ package ru.skillbranch.devintensive.extensions
 import java.lang.IllegalStateException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.abs
+
 
 const val SECOND = 1000L
 const val MINUTE = 60 * SECOND
@@ -33,9 +35,30 @@ fun Date.add(value:Int, units: TimeUnits=TimeUnits.SECOND):Date{ //Refactor - Ch
 
 
 fun Date.humanizeDiff(date: Date=Date()): String {
-//    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    //Домашнее задание
-    return "TODO"
+
+    var firstDate = this//дата к к.т. применяем метод humanizeDiff
+    var secondDate= date
+    var diff=(firstDate.time-secondDate.time)/1000
+    var ret:String
+
+    //уже обсуждалось тут, что левая часть не включительно, правая включительно
+    //assertEquals("только что", Date().add(-1, TimeUnits.SECOND).humanizeDiff(Date()))
+
+    val compare= abs(diff)
+    ret = when {
+        (compare in 0..1)-> "только что"
+        (compare in 2..45) -> "${if(diff<0) "несколько секунд назад" else "через несколько секунд"}"
+        (compare in 46..75) -> "${if(diff<0) "минуту назад" else "через минуту"}"
+        (compare in 76..2700) -> "${if(diff<0)    "${compare/60} минуты назад" else "через ${compare/60} минуты"}"
+        (compare in 2701..4500) -> "${if(diff<0)    "час назад" else "через час"}" //45мин - 75мин
+        (compare in 4501..79200) -> "${if(diff<0)    "${compare/60/60} часа назад" else "через ${compare/60/60} часа"}" //75мин - 22часа
+        (compare in 79200..93600) -> "${if(diff<0)    "день назад" else "через день"}" //22часа - 26 часов
+        (compare in 93601..31104000) -> "${if(diff<0)    "${compare/60/60/24} дней назад" else "через ${compare/60/60/24} дней"}" //22часа - 26 часов
+        (compare > 31104000) -> "${if(diff<0)    "более года назад" else "более чем через год"}" //22часа - 26 часов)
+        else -> "дата не известна"
+    }
+
+    return "$ret"
 }
 
 
