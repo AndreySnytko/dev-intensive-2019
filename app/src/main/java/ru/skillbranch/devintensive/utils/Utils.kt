@@ -5,9 +5,19 @@ package ru.skillbranch.devintensive.utils
 object Utils {
     fun parseFullName(fullName : String?):Pair<String?,String?>{
         //TODO: исправить метод чтобы корректно отрабатывал null, пробел, 2 пробела
-        val parts : List<String>? = fullName?.split(" ") //т.к. полное имя может быть null, то вызываем безопасный метод через знак ?
-        val firstName = parts?.getOrNull(0)
-        val lastName = parts?.getOrNull(1)
+
+
+
+        //Удаляем лишние пробелы "  John   Doe    ", replace - удаляет двойные, trim - удаляет с начала и с конца
+        val parts : List<String>? = fullName?.replace("\\s+".toRegex()," ")?.trim()?.split(" ")
+//        val parts : List<String>? = fullName?.split(" ") //т.к. полное имя может быть null, то вызываем безопасный метод через знак ?
+        var firstName = parts?.getOrNull(0)
+        var lastName = parts?.getOrNull(1)
+
+
+        //TODO: Не очень красивое решение, переделать
+        if((firstName=="")||(firstName==" "))firstName=null
+        if((lastName=="")||(lastName==" "))lastName=null
 
         //return Pair(firstName,lastName) //Встроенный дата класс, в котлине их 2а (Pair,Triple)
         // либо можно
