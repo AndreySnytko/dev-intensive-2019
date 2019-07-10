@@ -41,7 +41,7 @@ object Utils {
     }
 
 
-    fun transliteration(payloadIn: String, divider:String = ""): String {
+    fun transliteration(payloadIn: String, divider:String = " "): String {
         var retStr:String?
         var payload=payloadIn.replace("\\s+".toRegex()," ")?.trim()
         val russians="абвгдеёжзийклмнопрстуфхцчшщъыьэюя "
