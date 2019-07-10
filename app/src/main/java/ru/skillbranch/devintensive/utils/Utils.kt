@@ -1,5 +1,7 @@
 package ru.skillbranch.devintensive.utils
 
+import ru.skillbranch.devintensive.extensions.TimeUnits
+
 //Создан как новый Kotlin file/class Object
 // они что то вроде сингл тонов, статических методов функций
 object Utils {
@@ -39,9 +41,9 @@ object Utils {
     }
 
 
-    fun transliteration(payload: String, divider:String = ""): String {
+    fun transliteration(payloadIn: String, divider:String = ""): String {
         var retStr:String?
-
+        var payload=payloadIn.replace("\\s+".toRegex()," ")?.trim()
         val russians="абвгдеёжзийклмнопрстуфхцчшщъыьэюя "
         val english=arrayOf("a","b","v","g","d","e","e","zh","z","i","i","k","l","m","n","o","p","r","s","t","u","f","h","c","ch","sh","sh","","i","","e","yu","ya",divider)
         val englishUpper=arrayOf("A","B","V","G","D","E","E","Zh","Z","I","I","K","L","M","N","O","P","R","S","T","U","F","H","C","Ch","Sh","Sh","","I","","E","Yu","Ya",divider.toUpperCase())
