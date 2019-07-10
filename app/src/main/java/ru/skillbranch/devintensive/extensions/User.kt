@@ -8,7 +8,7 @@ import java.util.*
 //Не надо писать this, идентификатор автоматически замапился на конструктор UserView
 fun User.toUserView() : UserView {
 
-    val nickName = Utils.translitiration("$firstName $lastVisit")
+    val nickName = Utils.transliteration("$firstName $lastVisit")
     val initials = Utils.toInitials(firstName, lastName)
     val status = if(lastVisit == null) "Ещё ни разу не был" else if (isOnline) "online" else "Последний раз был ${lastVisit.humanizeDiff()}" // Перенесли реализацию в Date.kt , Alt+enter - сделали публичным методом
 

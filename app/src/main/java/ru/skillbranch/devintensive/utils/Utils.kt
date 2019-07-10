@@ -39,7 +39,7 @@ object Utils {
     }
 
 
-    fun translitiration(payload: String, divider:String = ""): String {
+    fun transliteration(payload: String, divider:String = ""): String {
         var retStr:String?
 
         val russians="абвгдеёжзийклмнопрстуфхцчшщъыьэюя "
