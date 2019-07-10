@@ -20,10 +20,6 @@ object Utils {
         return firstName to lastName //это пара ключ-значение
     }
 
-    fun translitiration(payload: String, divider:String = " "): String {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        return "TODO"
-    }
 
     fun toInitials(firstName: String?, lastName: String?): String? {
         var fN=firstName?.replace("\\s+".toRegex(),"")?.trim()
@@ -41,4 +37,25 @@ object Utils {
 
         return initials
     }
+
+
+    fun translitiration(payload: String, divider:String = ""): String {
+        var retStr:String?
+
+        val russians="абвгдеёжзийклмнопрстуфхцчшщъыьэюя "
+        val english=arrayOf("a","b","v","g","d","e","e","zh","z","i","i","k","l","m","n","o","p","r","s","t","u","f","h","c","ch","sh","sh","","i","","e","yu","ya",divider)
+        val englishUpper=arrayOf("A","B","V","G","D","E","E","Zh","Z","I","I","K","L","M","N","O","P","R","S","T","U","F","H","C","Ch","Sh","Sh","","I","","E","Yu","Ya",divider.toUpperCase())
+        var isUpper:Boolean
+        var index:Int
+        retStr=""
+
+        for(ch in payload){
+            isUpper=ch.isUpperCase()
+            index=russians.indexOf(ch.toLowerCase())
+            retStr+="${if(index==-1) ch else if(isUpper) englishUpper [index]  else english[index]}"
+        }
+
+        return retStr
+    }
+
 }
