@@ -26,7 +26,19 @@ object Utils {
     }
 
     fun toInitials(firstName: String?, lastName: String?): String? {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        return "TODO"
+        var fN=firstName?.replace("\\s+".toRegex(),"")?.trim()
+        var lN=lastName?.replace("\\s+".toRegex(),"")?.trim()
+        var initials:String?
+        if((fN!="")&&(fN!=null))fN=fN.substring(0,1).toUpperCase()
+        if((lN!="")&&(lN!=null))lN=lN.substring(0,1).toUpperCase()
+
+
+        if(((fN=="")||(fN==null))&&((lN=="")||(lN==null))){
+            initials=null
+        }else{
+            initials = "${if(fN==null) "" else fN}${if(lN==null) "" else lN}"
+        }
+
+        return initials
     }
 }
